@@ -29,11 +29,11 @@ SECRET_KEY = "django-insecure-z=xt(k^_@f7*w1l)v99s8@^mb*aznf9o2%knnpp0%9mou=fjy@
 DEBUG = True
 
 ALLOWED_HOSTS = ["web-production-c556.up.railway.app"]
-CSRF_TRUSTED_ORIGINS = ["https://*."]
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# CSRF_TRUSTED_ORIGINS = ["https://*."]
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'storages',
     'core',
     'accounts',
     'profiles'
