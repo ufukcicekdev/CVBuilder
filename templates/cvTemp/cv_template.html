@@ -1,0 +1,324 @@
+{% extends 'partialsBase/cvbase.html' %}
+
+
+{% block title %} Cv-Template {% endblock title %}
+
+{% block content %}
+
+
+{% include 'core/cvheader.html' %}
+
+     <style>
+        .certificate-img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.fullscreen-img {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreen-img img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+
+     </style>
+        
+
+        
+        <!--
+        ===================
+            HOME 
+        ===================
+        -->
+        <section class="mh-home" id="mh-home">
+            <div class="home-ovimg">
+                <div class="container">
+                    <div class="row xs-column-reverse section-separator vertical-middle-content home-padding">
+                        <div class="col-sm-6">
+                            <div class="mh-header-info">
+                                <div class="mh-promo wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
+                                    <span>Hello I'm</span>
+                                </div>
+                                
+                                <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ user_data.full_name }}</h2>
+                                <h4 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">{{ user_data.job_title }}</h4>
+                                
+                                <ul>
+                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"><i class="fa fa-envelope"></i><a href="mailto:{{ user_data.contact_email }}">{{ user_data.contact_email }}</a></li>
+                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s"><i class="fa fa-phone"></i><a href="callto:{{ user_data.phone_number }}">{{ user_data.phone_number }}</a></li>
+                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s"><i class="fa fa-map-marker"></i><address>{{ user_data.address }}</address></li>
+                                </ul>
+                                
+                                <ul class="social-icon wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
+                                    {% if user_data.facebook_link %}
+                                        <li><a target="_blank" href="{{ user_data.facebook_link }}"><i class="fa fa-facebook"></i></a></li>
+                                    {% endif %}
+                         
+                                    {% if user_data.github_link %}
+                                        <li><a target="_blank" href="{{ user_data.github_link }}"><i class="fa fa-github"></i></a></li>
+                                    {% endif %}
+                                    {% if user_data.personal_website %}
+                                        <li><a target="_blank" href="{{ user_data.personal_website }}"><i class="fa fa-globe"></i></a></li>
+                                    {% endif %}
+
+                                    {% if user_data.linkedin_link %}
+                                        <li><a target="_blank" href="{{ user_data.linkedin_link }}"><i class="fa fa-linkedin"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="hero-img wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+                                <div class="img-border">
+                                    <img src="{{ user_data.profile_picture }}" alt="Profile Picture" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        <!--
+        ==================
+            ABOUT
+        =================
+        -->
+        <section class="mh-about" id="mh-about">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-about-img shadow-2 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                            <img src="https://ufukcicekdev.fra1.digitaloceanspaces.com/CVBuilder/img/ab-img.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-about-inner">
+                            <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">About Me</h2>
+                            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ user_data.cover_letter.content }}</p>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+        ===================
+           PROJECTS
+        ===================
+        -->
+
+        <section class="mh-service" id="mh-service">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <h3>Projects</h3>
+                    </div>
+                    {% if user_data.projects %}
+                        {% for project in user_data.projects %}
+                        <div class="col-sm-4">
+                            <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                <i class="fa fa-bullseye purple-color"></i>
+                                <h3>{{ project.title }}</h3>
+                                <div class="mh-eduyear">{{ project.start_date }} - {{ project.end_date|default:"Ongoing" }}</div>
+                                <p>
+                                    {{ project.description }}
+                                </p>
+                                {% if project.url %}
+                                <a href="{{ project.url }}" class="btn btn-primary" target="_blank">View Detail</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No projects</p>
+                    {% endif %}
+
+                    
+                </div>
+            </div>
+        </section>
+        
+              
+        
+        <!--
+        ===================
+           SKILLS
+        ===================
+        -->
+        <section class="mh-skills" id="mh-skills">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="section-title text-center col-sm-12">
+                        <!--<h2>Skills</h2>-->
+                    </div>
+               
+                    <div class="col-sm-12 col-md-12">
+                        <div class="mh-professional-skills wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                            <h3>Skills</h3>
+                            {% if user_data.skills %}
+                            <ul class="mh-professional-progress" >
+                                {% for skill in user_data.skills %}
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="{{ skill.rating }}"></div>
+                                    <div class="pr-skill-name">{{ skill.name }}</div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p>No skills</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mh-certificate" id="mh-certificate">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <h3>Certificates</h3>
+                    </div>
+                    {% if user_data.certificates %}
+                        {% for certificate in user_data.certificates %}
+                        <div class="col-sm-4">
+                            <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                <i class="fa fa-bullseye purple-color"></i>
+                                <h3>{{ certificate.name }} - {{ certificate.issuing_organization }}</h3>
+                                <div class="mh-eduyear">{{ certificate.issue_date }} - {{ certificate.expiration_date|default:"Ongoing" }}</div>
+                                <p>
+                                    {{ certificate.description }}
+                                </p>
+                                {% if certificate.image %}
+                                <img src="{{ certificate.image.url }}" alt="{{ certificate.name }}" class="certificate-img" width="300" height="200" onclick="openFullScreen(this)">
+
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No certificates</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        
+        
+        <!--
+        ===================
+           EXPERIENCES
+        ===================
+        -->
+        <section class="mh-experince" id="mh-experience">
+            <div class="bolor-overlay">
+                <div class="container">
+                    <div class="row section-separator">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mh-education">
+                                 <h3 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Education</h3>
+                                {% if user_data.educations %}
+                                <div class="mh-education-deatils">
+                                    <!-- Education Institutes-->
+                                     {% for education in user_data.educations %}
+                                    <div class="mh-education-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                                        <h4> {{ education.field_of_study }} <a href="#">{{ education.institution }}</a></h4>
+                                        <div class="mh-eduyear">{{ education.start_date }}-{{ education.end_date|default:"Ongoing" }}</div>
+                                        <p>{{ education.description }} </p>
+                                    </div>       
+                                    {% endfor %}
+
+                                    
+                                </div>
+                                {% else %}
+                                <p>No education</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mh-work">
+                                 <h3>Work Experience</h3>
+                                 {% if user_data.experiences %}
+                                <div class="mh-experience-deatils">
+                                    <!-- Education Institutes-->
+                                     {% for experience in user_data.experiences %}
+                                    <div class="mh-work-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                                        <h4>{{ experince.job_title }} <a href="#">{{ experince.company_name }}</a></h4>
+                                        <div class="mh-eduyear">{{ experince.start_date }}-{{ experince.end_date|default:"Ongoing" }}</div>
+                                        <p>{{ experience.description }} </p>
+                                    </div>                                
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                <p>No experience</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+
+        <section class="mh-videos" id="mh-videos">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <h3>Self Introduction</h3>
+                    </div>
+                    {% if user_data.self_introduction %}
+                        <div class="col-sm-4">
+                            <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                <video width="100%" controls>
+                                    <source src="{{ user_data.self_introduction.video_url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>No self introduction</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    
+
+{% include 'core/footer.html' %}
+
+
+<script>
+    function openFullScreen(imgElement) {
+        var fullscreenDiv = document.createElement('div');
+        fullscreenDiv.className = 'fullscreen-img';
+        fullscreenDiv.onclick = function() {
+            this.remove();
+        };
+
+        var fullscreenImg = document.createElement('img');
+        fullscreenImg.src = imgElement.src;
+        fullscreenDiv.appendChild(fullscreenImg);
+
+        document.body.appendChild(fullscreenDiv);
+        fullscreenDiv.style.display = 'flex';
+    }
+</script>
+
+
+{% endblock %}

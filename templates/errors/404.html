@@ -1,0 +1,45 @@
+{% extends 'partialsBase/base.html' %}
+{% load static %}
+{% block title %}Failed 400{% endblock %}
+{% block content %}
+{% include 'core/header.html' %}
+        <main id="mt-main">
+        <!-- Mt Contact Banner of the Page -->
+        <section class="mt-contact-banner wow fadeInUp" data-wow-delay="0.4s" style="background-image: url(images/img06.jpg);">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <h1>404 Sayfa</h1>
+                <nav class="breadcrumbs">
+                  <ul class="list-unstyled">
+                    <li><a href="{% url 'main:home' %}">Home <i class="fa fa-angle-right"></i></a></li>
+                    <li><a href="{% url 'main:home' %}">404 Page</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section><!-- Mt Contact Banner of the Page -->
+        <!-- Mt Error Sec of the Page -->
+        <section class="mt-error-sec dark">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <span class="error-code montserrat">404</span>
+                <h1 class="text-uppercase montserrat">Page NotFound!</h1>
+                <div class="txt">
+                  <p>Üzgünüm, Birşeyler Ters Gitti.</p>
+                </div>
+                <ul class="list-unstyled btn-list">
+                  <li><a href="{% url 'main:home' %}" class="btn-back text-uppercase">Home</a></li>
+                  <li>
+                    
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section><!-- Mt Error Sec of the Page end -->
+      </main>
+{% include 'core/footer.html' %}
+{% endblock content %}

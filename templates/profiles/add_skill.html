@@ -1,0 +1,78 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit Profile {% endblock title %}
+
+{% block content %}
+
+
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url({% static 'img/bg-img/bg-2.html' %})"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">Add Skill</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'profile:profile' %}">Profile</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Skill</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">Add Skill</div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="form-group">
+                                <div class="error">{{ form.non_field_errors }}</div>
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="id_name">Skill Name</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="error">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="id_rating">Rating</label>
+                            {{ form.rating }}
+                            {% if form.rating.errors %}
+                                <div class="error">{{ form.rating.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Add Skill</button>
+                        </div>
+                    </form>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'core/footer.html' %}
+
+{% endblock %}

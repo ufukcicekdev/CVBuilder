@@ -1,0 +1,69 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit Profile {% endblock title %}
+
+{% block content %}
+
+
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url({% static 'img/bg-img/bg-2.html' %})"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">Edit Cover Letter</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'profile:profile' %}">Profile</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Cover Letter</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">Edit Cover Letter</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            {{ form.content.label_tag }}
+                            {{ form.content }}
+                            {% if form.content.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.content.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'core/footer.html' %}
+
+{% endblock %}

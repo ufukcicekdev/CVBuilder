@@ -1,0 +1,118 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit Profile {% endblock title %}
+
+{% block content %}
+
+<style>
+    /* Optional CSS styles specific to edit profile page */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-group .error {
+        color: red;
+    }
+
+    .form-group .profile-picture {
+        max-width: 200px;
+        max-height: 200px;
+        margin-bottom: 10px;
+    }
+</style>
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url({% static 'img/bg-img/bg-2.html' %})"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">Add Self introduction</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'profile:profile' %}">Profile</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Self introduction</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">Add Self Introduction</div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="id_video">Video (Max 50MB, Video Formats Only)</label>
+                            {{ form.video }}
+                            {% if form.video.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.video.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'core/footer.html' %}
+
+
+<script>
+    $(document).ready(function() {
+        // File input element
+        var fileInput = $('#id_video');
+
+        // Event listener for file input change
+        fileInput.change(function() {
+            var file = fileInput[0].files[0];
+            if (file) {
+                // Maximum file size allowed (50 MB)
+                var maxSize = 50 * 1024 * 1024;  // 50 MB in bytes
+                if (file.size > maxSize) {
+                    alert('The file size must be under 50 MB.');
+                    fileInput.val('');  // Clear the file input
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Signin {% endblock title %}
+
+{% block content %}
+<style>
+    .error {
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+}
+</style>
+
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url(img/bg-img/bg-2.html)"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">SIGNIN</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Signin</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+<section class="welcome_area demo2 flex align-items-center">
+<div class="container">
+
+    <div class="row align-items-center">
+        <div id="" class="white-popup">
+            <div class="top-form-header">
+                <h4>Login Form</h4>
+            </div>
+            <form action="" method="post" id="main_login_form" novalidate>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="group">
+                            {{ form.username }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Username</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="group">
+                            {{ form.password }}
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Password</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-5 text-left">
+                        <button type="submit" class="btn dream-btn">Login</button>
+                    </div>
+                    <div class="col-12 col-sm-7 text-left">
+                        <p class="mb-0 mt-10">Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a></p>
+                    </div>
+                </div>
+            </form>
+        
+        </div>
+    </div>
+    
+</div>
+
+</section>
+
+
+
+
+
+{% include 'core/footer.html' %}
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Signup {% endblock title %}
+
+{% block content %}
+
+<style>
+    .error {
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+}
+</style>
+
+
+{% include 'core/header.html' %}
+
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url(img/bg-img/bg-2.html)"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">SIGNUP</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">SIGNUP</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+
+<div id="signup-popup" class="white-popup">
+    <div class="top-form-header">
+        <h4>Signup Form</h4>
+    </div>
+    <form action="" method="post" id="main_signup_form" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <div class="group">
+                    {{ form.username }}
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Username</label>
+                    {% if form.username.errors %}
+                    <div class="error">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="group">
+                    {{ form.email }}
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Email</label>
+                    {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="group">
+                    {{ form.password1 }}
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Password</label>
+                    {% if form.password1.errors %}
+                    <div class="error">{{ form.password1.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-12">
+                <div class="group">
+                    {{ form.password2 }}
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Confirm Password</label>
+                    {% if form.password2.errors %}
+                    <div class="error">{{ form.password2.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 text-left">
+                <button type="submit" class="btn dream-btn">Sign Up</button>
+            </div>
+            <div class="col-12 col-sm-7 text-left">
+                <p class="mb-0 mt-10">Already have an account? <a href="{% url 'accounts:signin' %}">Sign in</a></p>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+    {% include 'core/footer.html' %}
+{% endblock %}

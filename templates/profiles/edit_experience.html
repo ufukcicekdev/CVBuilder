@@ -1,0 +1,105 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit Profile {% endblock title %}
+
+{% block content %}
+
+
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url({% static 'img/bg-img/bg-2.html' %})"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">Edit Experience</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'profile:profile' %}">Profile</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Experience</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">Edit Experience</div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="form-group">
+                                <div class="error">{{ form.non_field_errors }}</div>
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="id_company">Company Name</label>
+                            {{ form.company_name }}
+                            {% if form.company_name.errors %}
+                                <div class="error">{{ form.company_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_job_title">Job Title</label>
+                            {{ form.job_title }}
+                            {% if form.job_title.errors %}
+                                <div class="error">{{ form.job_title.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_start_date">Start Date</label>
+                            {{ form.start_date }}
+                            {% if form.start_date.errors %}
+                                <div class="error">{{ form.start_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_end_date">End Date</label>
+                            {{ form.end_date }}
+                            {% if form.end_date.errors %}
+                                <div class="error">{{ form.end_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_description">Description</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="error">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group form-check">
+                            {{ form.ongoing }}
+                            <label class="form-check-label" for="id_ongoing">Ongoing</label>
+                            {% if form.ongoing.errors %}
+                                <div class="error">{{ form.ongoing.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'core/footer.html' %}
+
+{% endblock %}

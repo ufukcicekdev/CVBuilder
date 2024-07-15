@@ -1,0 +1,523 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block content %}
+
+<style>
+    /* Optional CSS styles specific to profile page */
+    .profile-info {
+        margin-bottom: 20px;
+    }
+
+    .profile-info p {
+        margin-bottom: 10px;
+    }
+
+    .profile-info strong {
+        margin-right: 10px;
+    }
+
+    .profile-picture {
+        max-width: 200px;
+        max-height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .profile-picture-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto; /* Ortalamak için */
+}
+
+.profile-picture {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .card {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 0; /* Flexbox özellikleri */
+        margin: 10px;
+        overflow: hidden; /* Taşan içerikler için gizleme */
+        max-height: 400px;
+        min-height: 400px; /* Kartın maksimum yüksekliği */
+    }
+    .scrollable-card-body {
+        overflow-y: auto; /* Dikey kaydırma çubuğu ekliyoruz */
+        flex-grow: 1; /* İçerik yüksekliğine göre genişletiyoruz */
+        padding: 10px; /* İçeriği kenarlardan ayırmak için */
+    }
+    .card-footer {
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .container{
+        margin-top: 10px;
+    }
+</style>
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url({% static 'img/bg-img/bg-2.html' %})"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">Profile</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+
+
+
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#profile-tab">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#template-tab">Template</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="profile-tab" class="tab-pane fade show active">
+            <!-- Profile content here -->
+            <div class="row card-container">
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Profile</div>
+                        <div class="card-body scrollable-card-body">
+                            <div class="profile-info">
+                                {% if profile.profile_picture %}
+                                    <div class="profile-picture-container">
+                                        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+                                    </div>
+                                {% else %}
+                                    <p>No profile picture uploaded.</p>
+                                {% endif %}
+                                <p><strong>Full Name:</strong> {{ profile.full_name }}</p>
+                                <p><strong>Contact Email:</strong> {{ profile.contact_email }}</p>
+                                <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+                                <p><strong>Address:</strong> {{ profile.address }}</p>
+                                
+                                <div class="social-links">
+                                    {% if profile.github_link %}
+                                        <a href="{{ profile.github_link }}" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
+                                    {% endif %}
+                                    {% if profile.facebook_link %}
+                                        <a href="{{ profile.facebook_link }}" target="_blank" class="social-link"><i class="fa fa-facebook"></i></a>
+                                    {% endif %}
+                                    {% if profile.linkedin_link %}
+                                        <a href="{{ profile.linkedin_link }}" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a>
+                                    {% endif %}
+                                    {% if profile.personal_website %}
+                                        <a href="{{ profile.personal_website }}" target="_blank" class="social-link"><i class="fa fa-globe"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'profile:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+                            <a href="{% url 'accounts:changepass' %}" class="btn btn-primary">Password Update</a>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Education</div>
+                        <div class="card-body scrollable-card-body">
+                            {% for education in educations %}
+                                <div class="education-info {% cycle 'bg-white' 'bg-light' %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>{{ education.degree }} in {{ education.field_of_study }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>School:</strong> {{ education.institution|truncatechars:12 }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Start Date:</strong> {{ education.start_date }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>End Date:</strong> {{ education.end_date|default:"Ongoing" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_education' education.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_education' education.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this education information?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <p>No education information added yet.</p>
+                            {% endfor %}
+                        </div>
+                        
+                        
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_education' %}" class="btn btn-primary">Add Education</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Experience</div>
+                        <div class="card-body scrollable-card-body">
+                            {% for experience in experiences %}
+                                <div class="experience-info {% cycle 'bg-white' 'bg-light' %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>{{ experience.job_title }} at {{ experience.company_name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Company:</strong> {{ experience.company_name }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Start Date:</strong> {{ experience.start_date }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>End Date:</strong> {{ experience.end_date|default:"Ongoing" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_experience' experience.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_experience' experience.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this experience information?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <p>No experience information added yet.</p>
+                            {% endfor %}
+                        </div>
+                        
+                        
+                        
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_experience' %}" class="btn btn-primary">Add Experience</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Skill</div>
+                        <div class="card-body scrollable-card-body">
+                            {% for skill in skills %}
+                                <div class="skill-info {% cycle 'bg-white' 'bg-light' %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>{{ skill.name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Description:</strong> {{ skill.description|truncatechars:30 }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p><strong>Rating:</strong> {{ skill.rating }} / 100</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_skill' skill.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_skill' skill.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this skill?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <p>No skill information added yet.</p>
+                            {% endfor %}
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_skill' %}" class="btn btn-primary">Add Skill</a>
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Certificate</div>
+                        <div class="card-body scrollable-card-body">
+                            {% for certificate in certificates %}
+                                <div class="certificate-info {% cycle 'bg-white' 'bg-light' %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>{{ certificate.name }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Issuing Organization:</strong> {{ certificate.issuing_organization|truncatechars:30 }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Issue Date:</strong> {{ certificate.issue_date }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Expiration Date:</strong> {{ certificate.expiration_date|default:"N/A" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p><strong>Description:</strong> {{ certificate.description|truncatechars:30 }}</p>
+                                            {% if certificate.image %}
+                                                <img src="{{ certificate.image.url }}" alt="{{ certificate.name }}" class="img-thumbnail mt-2">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_certificate' certificate.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_certificate' certificate.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this certificate?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <p>No certificate information added yet.</p>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_certificate' %}" class="btn btn-primary">Add Certificate</a>
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Cover Letter</div>
+                        <div class="card-body scrollable-card-body">
+                            {% for cover_letter in cover_letters %}
+                                <div class="cover-letter-info {% cycle 'bg-white' 'bg-light' %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>{{ cover_letter.title }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Description:</strong> {{ cover_letter.content|truncatechars:30 }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Created:</strong> {{ cover_letter.created_at }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Last Updated:</strong> {{ cover_letter.updated_at }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_cover_letter' cover_letter.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_cover_letter' cover_letter.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this cover letter?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <p>No cover letter information added yet.</p>
+                            {% endfor %}
+                        </div>
+                        
+                        
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_cover_letter' %}" class="btn btn-primary">Add Cover Letter</a>
+                        </div>
+                    </div>
+                </div>
+        
+        
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Project</div>
+                        <div class="card-body scrollable-card-body">
+                            {% for project in projects %}
+                                <div class="project-info {% cycle 'bg-white' 'bg-light' %}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>{{ project.title }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Description:</strong> {{ project.description|truncatechars:30 }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>Start Date:</strong> {{ project.start_date }}</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><strong>End Date:</strong> {{ project.end_date|default:"Ongoing" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_project' project.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_project' project.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this project?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr>
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <p>No project information added yet.</p>
+                            {% endfor %}
+                        </div>
+                        
+                        
+                        
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_project' %}" class="btn btn-primary">Add Project</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Your Self-Introduction</div>
+                        <div class="card-body scrollable-card-body">
+                            {% if self_introduction %}
+                                <div class="self-introduction-info">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p><strong>Video:</strong> <a href="{{ self_introduction.video.url }}" target="_blank">{{ self_introduction.video.name }}</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p><strong>Uploaded:</strong> {{ self_introduction.created_at }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="{% url 'profile:edit_self_introduction' self_introduction.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                <form action="{% url 'profile:delete_self_introduction' self_introduction.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this self-introduction?')">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>No self-introduction added yet.</p>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'profile:add_self_introduction' %}" class="btn btn-primary">Add Self-Introduction</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div id="template-tab" class="tab-pane fade">
+            <!-- Template content here -->
+            <div class="row text-center">
+                <div class="col-12 col-lg-12" style="margin-top: 20px;">
+                    <a href="{% url 'profile:generate_user_cv' %}" class="btn btn-primary">Generate CV</a>
+                    {% if cv_generation_id %}
+                        <a href="{% url 'profile:view_cv' cv_generation_id.id %}" id="cvLink" target="_blank">View CV</a>
+                        <form action="{% url 'profile:delete_cv' cv_generation_id.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this cv?')">Delete</button>
+                        </form>
+                    {% else %}
+                        <p>No CV generated yet.</p>
+                    {% endif %}
+                    <p style="margin-top: 10px;">Any changes made to your profile will be directly reflected in the HTML page.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+{% include 'core/footer.html' %}
+
+{% endblock %}

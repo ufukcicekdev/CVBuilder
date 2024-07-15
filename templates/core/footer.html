@@ -1,0 +1,58 @@
+{% load static %}
+{% block content %}
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area bg-img">
+
+    <div class="footer-content-area spec">
+        <div class="container">
+            <div class="row ">
+                <div class="col-12 col-lg-4 col-md-6">
+                    <div class="footer-copywrite-info">
+                        <!-- Copywrite -->
+                        <div class="copywrite_text fadeInUp" data-wow-delay="0.2s">
+                            <div class="footer-logo">
+                                <a href="{% url 'core:home' %}"><img src="{% static 'img/core-img/logo.png' %}" alt="logo"> CV Builder </a>
+                            </div>
+                        </div>
+                        <!-- Social Icon -->
+                        <div class="footer-social-info fadeInUp" data-wow-delay="0.4s">
+                            <a href="https://www.linkedin.com/in/ufuk-cicek/"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 col-md-6">
+                
+                </div>
+                  
+                <div class="col-12 col-lg-2 col-md-6 ">
+                    <!-- Content Info -->
+                    <div class="contact_info_area d-sm-flex justify-content-between">
+                        <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.2s">
+                            <h5>NAVIGATE</h5>
+                            <a href="{% url 'core:home' %}"><p>Home</p></a>
+                            <a href="{% url 'core:about' %}"><p>About us</p></a>
+                            <a href="{% url 'core:contact' %}"><p>Contact</p></a>
+                        
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-12 col-lg-3 col-md-6 ">
+                    <div class="contact_info_area d-sm-flex justify-content-between">
+                        <!-- Content Info -->
+                        <div class="contact_info mt-s text-center fadeInUp" data-wow-delay="0.4s">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    </div>
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+{% endblock %}

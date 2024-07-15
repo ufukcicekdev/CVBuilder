@@ -1,0 +1,105 @@
+{% extends 'partialsBase/base.html' %}
+
+{% load static %}
+
+{% block title %} Edit Profile {% endblock title %}
+
+{% block content %}
+
+
+
+{% include 'core/header.html' %}
+
+<!-- ##### Welcome Area Start ##### -->
+<div class="breadcumb-area clearfix dzsparallaxer auto-init" data-options='{direction: "normal"}'>
+    <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url({% static 'img/bg-img/bg-2.html' %})"></div>
+    <!-- breadcumb content -->
+    <div class="breadcumb-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb" class="breadcumb--con text-center">
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">Edit Certificate</h2>
+                        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'profile:profile' %}">Profile</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Certificate</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">Edit Certificate</div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="form-group">
+                                <div class="error">{{ form.non_field_errors }}</div>
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="id_name">Certificate Name</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="error">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_issuing_organization">Issuing Organization</label>
+                            {{ form.issuing_organization }}
+                            {% if form.issuing_organization.errors %}
+                                <div class="error">{{ form.issuing_organization.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_issue_date">Issue Date</label>
+                            {{ form.issue_date }}
+                            {% if form.issue_date.errors %}
+                                <div class="error">{{ form.issue_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_expiration_date">Expiration Date</label>
+                            {{ form.expiration_date }}
+                            {% if form.expiration_date.errors %}
+                                <div class="error">{{ form.expiration_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_description">Description</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="error">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_image">Certificate Image</label>
+                            {{ form.image }}
+                            {% if form.image.errors %}
+                                <div class="error">{{ form.image.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'core/footer.html' %}
+
+{% endblock %}

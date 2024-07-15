@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Cv Builder</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <!-- Responsive Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icon-fonts.css' %}">
+
+
+
+
+
+</head>
+
+<body class="light-version">
+    
+    {% include 'message.html' %}
+
+    {% block content %}
+
+    {% endblock content %}
+    
+
+    <!-- Login popup form  -->
+
+    <!-- ########## All JS ########## -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery js -->
+    <script src="{% static 'js/jquery.min.js' %}" ></script>
+
+    <!-- Popper js -->
+    <script src="{% static 'js/popper.min.js' %}" ></script>
+
+    
+
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}" ></script>
+
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins.js' %}" ></script>
+    <script src="{% static 'js/particles.html' %}" ></script>
+    <script src="{% static 'js/app.html' %}" ></script>
+    <!-- Parallax js -->
+    <script src="{% static 'js/dzsparallaxer.js' %}" ></script>
+
+    <script src="{% static 'js/jquery.syotimer.min.js' %}" ></script>
+
+
+    <!-- script js -->
+    <script src="{% static 'js/script.js' %}" ></script>
+    <script src="{% static 'js/function.js' %}" ></script>
+
+
+</body>
+
+
+</html>
