@@ -11,7 +11,7 @@ from django.http import HttpResponse
 @login_required(login_url='accounts:signin')
 def profile(request):
     # Kullanıcının profili
-    profile = Profile.objects.get(user=request.user)
+    profile = Profile.objects.filter(user=request.user)
     educations = Education.objects.filter(user=request.user)
     experiences = Experience.objects.filter(user=request.user)
     skills = Skill.objects.filter(user=request.user)
