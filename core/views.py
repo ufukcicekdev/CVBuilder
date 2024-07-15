@@ -26,7 +26,7 @@ def contact(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your message has been sent successfully!')
-            return redirect('success')  # Success view or URL name
+            return redirect('core:contact')  # Success view or URL name
         else:
             for field, errors in form.errors.items():
                 for error in errors:
