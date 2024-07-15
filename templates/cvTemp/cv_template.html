@@ -260,8 +260,8 @@
                                     <!-- Education Institutes-->
                                      {% for experience in user_data.experiences %}
                                     <div class="mh-work-item dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
-                                        <h4>{{ experince.job_title }} <a href="#">{{ experince.company_name }}</a></h4>
-                                        <div class="mh-eduyear">{{ experince.start_date }}-{{ experince.end_date|default:"Ongoing" }}</div>
+                                        <h4>{{ experience.job_title }} <a href="#">{{ experience.company_name }}</a></h4>
+                                        <div class="mh-eduyear">{{ experience.start_date }}-{{ experience.end_date|default:"Ongoing" }}</div>
                                         <p>{{ experience.description }} </p>
                                     </div>                                
                                     {% endfor %}
