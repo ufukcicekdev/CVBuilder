@@ -11,7 +11,7 @@ from django.http import HttpResponse
 @login_required(login_url='accounts:signin')
 def profile(request):
     # Kullanıcının profili
-    profile = Profile.objects.filter(user=request.user)
+    profile = Profile.objects.filter(user=request.user).first()
     educations = Education.objects.filter(user=request.user)
     experiences = Experience.objects.filter(user=request.user)
     skills = Skill.objects.filter(user=request.user)
@@ -20,6 +20,7 @@ def profile(request):
     projects = Project.objects.filter(user=request.user)
     self_introduction = SelfIntroduction.objects.filter(user=request.user).first()
     cv_generation_id = GeneratedCV.objects.filter(user=request.user).first()
+
 
     context = {
         'profile': profile, 
