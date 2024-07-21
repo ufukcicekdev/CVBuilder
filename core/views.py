@@ -5,22 +5,30 @@ from django.http import JsonResponse
 from .forms import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
+from language.utils import get_translation
+from django.utils import translation
+from django.conf import settings
+from translateContext.translateContext import *
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'core/home.html')
+    mainContext = get_trans_lang(request)
+
+    return render(request, 'core/home.html', mainContext)
 
 
 
 
 def about(request):
-    return render(request, 'core/about.html')
+    mainContext = get_trans_lang(request)
+    return render(request, 'core/about.html', mainContext)
 
 
 
 def contact(request):
+    mainContext = get_trans_lang(request)
+
     if request.method == 'POST':
         form = ContactUsForm(request.POST)
         if form.is_valid():
@@ -33,7 +41,11 @@ def contact(request):
                     messages.error(request, f"{field}: {error}")
     else:
         form = ContactUsForm()
-    return render(request, 'core/contact.html', {'form': form})
+        context={
+            "form":form
+        }
+        mainContext.update(context)
+    return render(request, 'core/contact.html', mainContext)
 
 
 

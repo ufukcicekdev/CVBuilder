@@ -5,9 +5,13 @@ from django.contrib import messages
 from .forms import SignUpForm
 from actstream import action
 from django.contrib.auth.decorators import login_required
-
+from language.utils import get_translation
+from django.utils import translation
+from django.conf import settings
+from translateContext.translateContext import *
 
 def signup_view(request):
+    mainContext = get_trans_lang(request)
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -24,9 +28,14 @@ def signup_view(request):
                     messages.error(request, f"{field}: {error}")
     else:
         form = SignUpForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+        context = {
+            "form":form
+        }
+        mainContext.update(context)
+    return render(request, 'accounts/signup.html', mainContext)
 
 def signin_view(request):
+    mainContext = get_trans_lang(request)
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -45,7 +54,11 @@ def signin_view(request):
                     messages.error(request, f"{field}: {error}")
     else:
         form = AuthenticationForm()
-    return render(request, 'accounts/signin.html', {'form': form})
+        context = {
+            "form":form
+        }
+        mainContext.update(context)
+    return render(request, 'accounts/signin.html', mainContext)
 
 
 @login_required(login_url='accounts:signin')

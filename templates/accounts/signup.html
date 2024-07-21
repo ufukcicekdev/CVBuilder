@@ -27,10 +27,10 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <nav aria-label="breadcrumb" class="breadcumb--con text-center">
-                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">SIGNUP</h2>
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">{{ signup }}</h2>
                         <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
-                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">SIGNUP</li>
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">{{ home }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ signup }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -43,7 +43,7 @@
 
 <div id="signup-popup" class="white-popup">
     <div class="top-form-header">
-        <h4>Signup Form</h4>
+        <h4>{{ signup }}</h4>
     </div>
     <form action="" method="post" id="main_signup_form" novalidate>
         {% csrf_token %}
@@ -53,7 +53,7 @@
                     {{ form.username }}
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label>Username</label>
+                    <label>{{ signin_login_form_username }}</label>
                     {% if form.username.errors %}
                     <div class="error">{{ form.username.errors }}</div>
                     {% endif %}
@@ -75,7 +75,7 @@
                     {{ form.password1 }}
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label>Password</label>
+                    <label>{{ signin_login_form_password }}</label>
                     {% if form.password1.errors %}
                     <div class="error">{{ form.password1.errors }}</div>
                     {% endif %}
@@ -86,17 +86,17 @@
                     {{ form.password2 }}
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label>Confirm Password</label>
+                    <label>{{ signin_login_form_confirm_password }}</label>
                     {% if form.password2.errors %}
                     <div class="error">{{ form.password2.errors }}</div>
                     {% endif %}
                 </div>
             </div>
             <div class="col-12 col-sm-5 text-left">
-                <button type="submit" class="btn dream-btn">Sign Up</button>
+                <button type="submit" class="btn dream-btn">{{ signup }}</button>
             </div>
             <div class="col-12 col-sm-7 text-left">
-                <p class="mb-0 mt-10">Already have an account? <a href="{% url 'accounts:signin' %}">Sign in</a></p>
+                <p class="mb-0 mt-10">{{ already_have_an_account }}<a href="{% url 'accounts:signin' %}">{{ login }}</a></p>
             </div>
         </div>
     </form>

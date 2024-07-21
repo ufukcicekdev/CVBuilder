@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -27,15 +27,14 @@
     <meta name="google-site-verification" content="_wjG1zyN1kIjuRjyx52ty9Cdpc_rwjXVuTLGvWbzAkg" />
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDJ50NB3XE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HDJ50NB3XE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-HDJ50NB3XE');
-</script>
-
+      gtag('config', 'G-HDJ50NB3XE');
+    </script>
 
 
 </head>
@@ -47,10 +46,23 @@
     {% block content %}
 
     {% endblock content %}
-    
+
+        <input type="hidden" id="trans-scroll-up" value="{{ scroll_top }}">
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    // Çeviri verisine erişme
+    const scrollUpTranslation = document.getElementById('trans-scroll-up').value;
+
+    // Elementin metnini değiştirme
+    const scrollUpElement = document.getElementById('scrollUp');
+    scrollUpElement.textContent = scrollUpTranslation;
+});
+    </script>
 
     <!-- Login popup form  -->
-
+  
     <!-- ########## All JS ########## -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

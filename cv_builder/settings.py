@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +29,9 @@ SECRET_KEY = "django-insecure-z=xt(k^_@f7*w1l)v99s8@^mb*aznf9o2%knnpp0%9mou=fjy@
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+# ALLOWED_HOSTS = ["*"]
+
 
 ALLOWED_HOSTS = ["cvbuilder.tech"]
 CSRF_TRUSTED_ORIGINS = ["https://*."]
@@ -47,13 +52,15 @@ INSTALLED_APPS = [
     'storages',
     'core',
     'accounts',
-    'profiles'
+    'profiles',
+    'language'
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',  # Bu satırın eklenmiş olduğundan emin olun
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -63,6 +70,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "cv_builder.urls"
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 TEMPLATES = [
     {
@@ -134,7 +145,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+
+
+LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('tr', 'Türkçe'),
+]
 
 TIME_ZONE = 'Europe/Istanbul'
 
@@ -166,3 +185,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL="core:home"
 LOGOUT_REDIRECT_URL="core:home"
+
+
+SESSION_COOKIE_AGE = 3600
+SESSION_SAVE_EVERY_REQUEST = True

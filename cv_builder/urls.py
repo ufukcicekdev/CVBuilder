@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('accounts.urls')),
     path('', include('profiles.urls')),
-
+    path('', include('language.urls')),
 ]
 
 

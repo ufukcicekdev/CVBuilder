@@ -19,10 +19,10 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <nav aria-label="breadcrumb" class="breadcumb--con text-center">
-                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">About us</h2>
+                        <h2 class="w-text title wow fadeInUp" data-wow-delay="0.2s">{{ about }}</h2>
                         <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.4s">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">About us</li>
+                            <li class="breadcrumb-item"><a href="{% url 'core:home' %}">{{ home }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ about }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -31,72 +31,6 @@
     </div>
 </div>
 <!-- ##### Welcome Area End ##### -->
-
-<!-- ##### About Us Area Start ##### -->
-<section class="about-us-area section-padding-100-0 clearfix">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <div class="col-12 col-lg-6">
-                <div class="who-we-contant">
-                    <div class="dream-dots">
-                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                    <h4 class="bold">We Deliver The Best</h4>
-                    <div class="list-wrap align-items-center">
-                        <div class="row">
-                            
-                            <div class="col-md-12">
-                                <div class="side-feature-list-item">
-                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
-                                    <div class="foot-c-info">Proven CV Templates to increase Hiring Chance</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="side-feature-list-item">
-                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
-                                    <div class="foot-c-info">Creative and Clean Templates Design</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="side-feature-list-item">
-                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
-                                    <div class="foot-c-info">Easy and Intuitive Online CV Builder</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="side-feature-list-item">
-                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
-                                    <div class="foot-c-info">Free to use. Developed by hiring professionals.</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="side-feature-list-item">
-                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
-                                    <div class="foot-c-info">Fast Easy CV and Resume Formatting</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="side-feature-list-item">
-                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
-                                    <div class="foot-c-info">Recruiter Approved Phrases.</div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="welcome-meter wow fadeInUp mt-s" data-wow-delay="0.3s">
-                    <img src="img/core-img/cv.png" class="center-block" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ##### About Us Area End ##### -->
 
 
 <section class="demo-video feat section-padding-100 bub-left">
@@ -110,9 +44,9 @@
                         <div class="icon-img-box">
                             <img src="{% static 'img/icons/d1.png' %}" alt="">
                         </div>
-                        <h3><a href="#">Easy Online Resume Builder</a></h3>
+                        <h3><a href="#">{{ site_content_header_3 }}</a></h3>
                           <div class="text">
-                              Create professional resumes effortlessly with our user-friendly platform. Input your information, customize your design, and generate a shareable online CV in minutes. Perfect for job seekers, freelancers, and professionals looking to make an impact.
+                              {{ site_content_content_3 }}
                           </div>
                         
                     </div>
@@ -122,9 +56,9 @@
                         <div class="icon-img-box">
                             <img src="{% static 'img/icons/d2.png' %}" alt="">
                         </div>
-                        <h3><a href="#">Step by Step Expert Tips</a></h3>
+                        <h3><a href="#">{{ site_content_header_4 }}</a></h3>
                         <div class="text">
-                            Follow our expert tips and guidelines to create a standout resume. From choosing the right format to highlighting your key skills, our step-by-step instructions ensure your resume is polished and professional.
+                          {{ site_content_content_4 }}
                         </div>
                     </div>
                 </div>
@@ -133,10 +67,10 @@
                         <div class="icon-img-box">
                             <img src="{% static 'img/icons/d3.png' %}" alt="">
                         </div>
-                        <h3><a href="#">Recruiter Approved Phrases</a></h3>
-<div class="text">
-  Discover recruiter-approved phrases and tips to enhance your resume. Craft compelling content that captures attention and impresses employers. Elevate your job application with expert insights.
-</div>
+                          <h3><a href="#">{{ site_content_header_5 }}</a></h3>
+                          <div class="text">
+                          {{ 	site_content_content_5}}
+                          </div>
                         
                     </div>
                 </div>
@@ -144,13 +78,12 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="who-we-contant mt-s">
-                    <div class="dream-dots">
-                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                    <h4>Why Choose Our Platform?</h4>
-<p>Build your professional resume effortlessly with our intuitive platform.</p>
-<p>Explore our user-friendly features designed to help you stand out in your job search. From customizable templates to expert tips, we're here to support your career journey.</p>
-<a class='btn dream-btn mt-30' href="{% url 'profile:profile' %}">Let's Build Your CV</a>
+                      <div class="dream-dots">
+                          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                      </div>
+                      <h4>{{ site_content_header_6 }}</h4>
+                      <p>{{ site_content_content_6 }}</p>
+                      <a class='btn dream-btn mt-30' href="{% url 'profile:profile' %}">{{ lets_build_your_cv }}</a>
 
                 </div>
             </div>
@@ -158,16 +91,86 @@
     </div>
 </section>
 
+    
+   
+<!-- ##### About Us Area Start ##### -->
+<section class="about-us-area section-padding-100 clearfix">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-12 col-lg-6">
+                <div class="who-we-contant">
+                    <div class="dream-dots">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <h4 class="bold">{{ site_content_header_7 }}</h4>
+                    <div class="list-wrap align-items-center">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="side-feature-list-item">
+                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
+                                    <div class="foot-c-info">{{ site_content_header_7_1 }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="side-feature-list-item">
+                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
+                                    <div class="foot-c-info">{{ site_content_header_7_2 }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="side-feature-list-item">
+                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
+                                    <div class="foot-c-info">{{ site_content_header_7_3 }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="side-feature-list-item">
+                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
+                                    <div class="foot-c-info">{{ site_content_header_7_4 }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="side-feature-list-item">
+                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
+                                    <div class="foot-c-info">{{ site_content_header_7_5 }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="side-feature-list-item">
+                                    <img src="{% static 'img/icons/check.png' %}" class="check-mark-icon" alt="">
+                                    <div class="foot-c-info">{{ site_content_header_7_6 }}</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="welcome-meter wow fadeInUp mt-s" data-wow-delay="0.3s">
+                    <!-- <img src="{% static 'img/core-img/cv.png' %}" class="center-block" alt=""> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### About Us Area End ##### -->
+
+<div class="clearfix"></div>
+
 <!-- ##### Area start ##### -->
-<section class="container section-padding-100-0">
+<section class="container section-padding-0-100">
     <div class="subscribe">
         <div class="row align-items-center relative">
             <img src="{% static 'img/core-img/custom.png' %}" alt="" class="custom">
             <div class="col-lg-5 col-lg-offset-3 col-md-9 col-xs-12">
-                <h2 class="bold mb-0">Do you Need a Complete Custom CV Template?</h2>
+                <h2 class="bold mb-0">{{ site_content_header_8 }}</h2>
             </div>
             <div class="col-lg-3 col-lg-offset-1 col-md-3 col-sm-12 text-center">
-                <a class='button mt-s' href="{% url 'core:about' %}">Send a Request</a>
+                <a class='button mt-s' href="{% url 'core:contact' %}">{{ send_a_request }}</a>
             </div>
                       
         </div>
