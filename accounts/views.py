@@ -63,6 +63,7 @@ def signin_view(request):
 
 @login_required(login_url='accounts:signin')
 def change_password(request):
+    mainContext = get_trans_lang(request)
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -76,8 +77,13 @@ def change_password(request):
                     messages.error(request, f"{field.capitalize()}: {error}")
     else:
         form = PasswordChangeForm(request.user)
+
+    context = {
+        "form": form,
+    }
     
-    return render(request, 'profiles/change_password.html', {'form': form})
+    mainContext.update(context)
+    return render(request, 'profiles/change_password.html', mainContext)
 
 
 

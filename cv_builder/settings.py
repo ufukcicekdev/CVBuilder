@@ -28,17 +28,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-z=xt(k^_@f7*w1l)v99s8@^mb*aznf9o2%knnpp0%9mou=fjy@"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]
 
 
-ALLOWED_HOSTS = ["cvbuilder.tech"]
-CSRF_TRUSTED_ORIGINS = ["https://*."]
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# ALLOWED_HOSTS = ["cvbuilder.tech"]
+# CSRF_TRUSTED_ORIGINS = ["https://*."]
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'core',
     'accounts',
     'profiles',
-    'language'
+    'language',
+    "cities_light",
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +72,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "cv_builder.urls"
+
+
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')
@@ -178,6 +182,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_BASEPATH = "static/ckeditor/ckeditor/"
+
+CKEDITOR_CONFIGS = {
+   'default': {
+       'toolbar_Full': [
+            ['Bold', 'Italic', 'Underline', 'Undo', 'Redo'],
+            ['TextColor', 'BGColor'],
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            ['NumberedList','BulletedList'],
+            ['Indent','Outdent'],
+        ],
+        'extraPlugins': 'justify,liststyle,indent',
+   },
+}
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -189,3 +210,12 @@ LOGOUT_REDIRECT_URL="core:home"
 
 SESSION_COOKIE_AGE = 3600
 SESSION_SAVE_EVERY_REQUEST = True
+
+
+CITIES_LIGHT_TRANSLATION_LANGUAGES = []
+
+CITIES_LIGHT_INCLUDE_COUNTRY = True
+CITIES_LIGHT_INCLUDE_REGION = False
+CITIES_LIGHT_INCLUDE_CITY = True
+CITIES_LIGHT_INCLUDE_SUBREGION = False
+

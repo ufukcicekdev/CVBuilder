@@ -27,7 +27,7 @@ form.language-form {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 /* Select kutusu stili */
@@ -99,24 +99,27 @@ form.language-form input[type="submit"]:hover {
                         <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                     </div>
                     
-                    <form action="{% url 'language:set_language' %}" method="get" class="language-form">
-                        {% csrf_token %}
-                        <select name="language" onchange="this.form.submit()">
-                            {% if current_language == 'en-us' or current_language == 'en' %}
-                                <option value="en" {% if current_language == 'en' %}selected{% endif %}>English</option>
-                                <option value="tr" {% if current_language == 'tr' %}selected{% endif %}>Turkish</option>
-                            {% elif current_language == 'tr' %}
-                                <option value="en" {% if current_language == 'en' %}selected{% endif %}>İngilizce</option>
-                                <option value="tr" {% if current_language == 'tr' %}selected{% endif %}>Türkçe</option>
-                            {% endif %}
-                        </select>
-                        <input type="hidden" name="next" value="{{ request.path }}">
-                    </form>
+                    
                     
 
                     <!-- Nav Start -->
                     <div class="classynav">
+
+                        <form action="{% url 'language:set_language' %}" method="get" class="language-form">
+                            {% csrf_token %}
+                            <select name="language" onchange="this.form.submit()">
+                                {% if current_language == 'en-us' or current_language == 'en' %}
+                                    <option value="en" {% if current_language == 'en' %}selected{% endif %}>English</option>
+                                    <option value="tr" {% if current_language == 'tr' %}selected{% endif %}>Turkish</option>
+                                {% elif current_language == 'tr' %}
+                                    <option value="en" {% if current_language == 'en' %}selected{% endif %}>İngilizce</option>
+                                    <option value="tr" {% if current_language == 'tr' %}selected{% endif %}>Türkçe</option>
+                                {% endif %}
+                            </select>
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                        </form>
                         <ul id="nav">
+                        
                             <li><a href="{% url 'core:home' %}">{{ home }}</a></li>
                             <li><a href="{% url 'core:about' %}">{{ about }} </a></li>
                             <li><a href="{% url 'core:contact' %}">{{ contact }}</a></li>

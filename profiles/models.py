@@ -27,7 +27,7 @@ class Education(models.Model):
     institution = models.CharField(max_length=255)
     degree = models.CharField(max_length=100)
     field_of_study = models.CharField(max_length=100)
-    start_date = models.DateField()
+    start_date = models.DateField(null=True, blank=True)  # `null=True` ve `blank=True` ekleyin
     end_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True)
 
@@ -40,7 +40,7 @@ class Experience(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=255)
     job_title = models.CharField(max_length=100)
-    start_date = models.DateField()
+    start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True)
 
@@ -87,7 +87,7 @@ class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    start_date = models.DateField()
+    start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(null=True, blank=True)
     url = models.URLField(blank=True, null=True)
 

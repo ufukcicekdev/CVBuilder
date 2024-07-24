@@ -6,67 +6,193 @@
 
 {% block content %}
 
+
 <style>
-    /* Optional CSS styles specific to profile page */
-    .profile-info {
-        margin-bottom: 20px;
-    }
+    /* Profil Sayfası Stilleri */
 
-    .profile-info p {
-        margin-bottom: 10px;
-    }
+/* Genel Stil Ayarları */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 20px;
+}
 
-    .profile-info strong {
-        margin-right: 10px;
-    }
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-    .profile-picture {
-        max-width: 200px;
-        max-height: 200px;
-        margin-bottom: 10px;
-    }
+/* Kart Stil Ayarları */
+.card-container {
+    margin: 20px 0;
+}
 
-    .profile-picture-container {
-    width: 150px;
-    height: 150px;
+.card {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto; /* Ortalamak için */
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.scrollable-card-body {
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .profile-picture {
-    width: 100%;
-    height: auto;
-    display: block;
+    max-width: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
-.card-container {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-    .card {
-        display: flex;
-        flex-direction: column;
-        flex: 1 1 0; /* Flexbox özellikleri */
-        margin: 10px;
-        overflow: hidden; /* Taşan içerikler için gizleme */
-        max-height: 400px;
-        min-height: 400px; /* Kartın maksimum yüksekliği */
-    }
-    .scrollable-card-body {
-        overflow-y: auto; /* Dikey kaydırma çubuğu ekliyoruz */
-        flex-grow: 1; /* İçerik yüksekliğine göre genişletiyoruz */
-        padding: 10px; /* İçeriği kenarlardan ayırmak için */
-    }
-    .card-footer {
-        text-align: center;
-        padding-top: 10px;
-    }
+.profile-info p,
+.education-info p,
+.experience-info p,
+.skill-info p,
+.certificate-info p,
+.cover-letter-info p,
+.project-info p,
+.self-introduction-info p {
+    margin-bottom: 10px;
+}
 
-    .container{
-        margin-top: 10px;
+.social-links {
+    display: flex;
+    justify-content: center; /* Bu satır ile ortalama yapılır */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-link i {
+    font-size: 20px;
+    color: #007bff;
+}
+
+.social-link:hover i {
+    color: #0056b3;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #dee2e6;
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
+
+<style>
+    .skill-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 150px; /* Kart genişliği */
+}
+
+.skill-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Kartlar arasında boşluk */
+}
+
+.skill-info h5 {
+    margin-bottom: 10px;
+}
+
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0 100;
     }
+}
+
+.bg-blue {
+    background-color: #cce5ff;
+}
+
+.bg-red {
+    background-color: #f8d7da;
+}
+
 </style>
 
 {% include 'core/header.html' %}
@@ -109,10 +235,10 @@
         <div id="profile-tab" class="tab-pane fade show active">
             <!-- Profile content here -->
             <div class="row card-container">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Profile</div>
-                        <div class="card-body scrollable-card-body">
+                        <div class="card-body scrollable-card-body text-center">
                             <div class="profile-info">
                                 {% if profile.profile_picture %}
                                     <div class="profile-picture-container">
@@ -125,7 +251,7 @@
                                 <p><strong>Contact Email:</strong> {{ profile.contact_email }}</p>
                                 <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
                                 <p><strong>Address:</strong> {{ profile.address }}</p>
-                                
+        
                                 <div class="social-links">
                                     {% if profile.github_link %}
                                         <a href="{{ profile.github_link }}" target="_blank" class="social-link"><i class="fa fa-github"></i></a>
@@ -145,13 +271,14 @@
                         <div class="card-footer">
                             <a href="{% url 'profile:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
                             <a href="{% url 'accounts:changepass' %}" class="btn btn-primary">Password Update</a>
+                            <a href="{% url 'accounts:logout' %}" class="btn btn-primary">Logout</a>
+
                         </div>
+                        
                     </div>
-                    
-                    
                 </div>
         
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Education</div>
                         <div class="card-body scrollable-card-body">
@@ -167,10 +294,10 @@
                                             <p><strong>School:</strong> {{ education.institution|truncatechars:12 }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>Start Date:</strong> {{ education.start_date }}</p>
+                                            <p><strong>Start Date:</strong> {{ education.start_date|date }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>End Date:</strong> {{ education.end_date|default:"Ongoing" }}</p>
+                                            <p><strong>End Date:</strong> {{ education.end_date|date|default:"Ongoing" }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -191,16 +318,15 @@
                             {% empty %}
                                 <p>No education information added yet.</p>
                             {% endfor %}
+                            
                         </div>
-                        
-                        
                         <div class="card-footer">
                             <a href="{% url 'profile:add_education' %}" class="btn btn-primary">Add Education</a>
                         </div>
                     </div>
                 </div>
         
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Experience</div>
                         <div class="card-body scrollable-card-body">
@@ -216,10 +342,10 @@
                                             <p><strong>Company:</strong> {{ experience.company_name }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>Start Date:</strong> {{ experience.start_date }}</p>
+                                            <p><strong>Start Date:</strong> {{ experience.start_date|date }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>End Date:</strong> {{ experience.end_date|default:"Ongoing" }}</p>
+                                            <p><strong>End Date:</strong> {{ experience.end_date|date|default:"Ongoing" }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -240,62 +366,60 @@
                             {% empty %}
                                 <p>No experience information added yet.</p>
                             {% endfor %}
+                            
                         </div>
-                        
-                        
-                        
                         <div class="card-footer">
                             <a href="{% url 'profile:add_experience' %}" class="btn btn-primary">Add Experience</a>
                         </div>
                     </div>
                 </div>
         
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
-                        <div class="card-header">Your Skill</div>
-                        <div class="card-body scrollable-card-body">
-                            {% for skill in skills %}
-                                <div class="skill-info {% cycle 'bg-white' 'bg-light' %}">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h5>{{ skill.name }}</h5>
+                        <div class="card-header">Your Skills</div>
+                        <div class="card-body">
+                            <div class="skill-container">
+                                {% for skill in skills %}
+                                    <div class="skill-info {% cycle 'bg-blue' 'bg-red' %}">
+                                        <h5>{{ skill.name }}</h5>
+                                        <div class="circular-chart">
+                                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                                <path class="circle-bg"
+                                                    d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                <path class="circle" stroke-dasharray="{{ skill.rating }}, 100"
+                                                    d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            </svg>
+                                            <p><strong>{{ skill.rating }}%</strong></p>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p><strong>Description:</strong> {{ skill.description|truncatechars:30 }}</p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p><strong>Rating:</strong> {{ skill.rating }} / 100</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <a href="{% url 'profile:edit_skill' skill.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
-                                                <form action="{% url 'profile:delete_skill' skill.id %}" method="post">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this skill?')">Delete</button>
-                                                </form>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex justify-content-start align-items-center">
+                                                    <a href="{% url 'profile:edit_skill' skill.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                                    <form action="{% url 'profile:delete_skill' skill.id %}" method="post">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this skill?')">Delete</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {% if not forloop.last %}
-                                        <hr>
-                                    {% endif %}
-                                </div>
-                            {% empty %}
-                                <p>No skill information added yet.</p>
-                            {% endfor %}
-                        </div>
-                        <div class="card-footer">
-                            <a href="{% url 'profile:add_skill' %}" class="btn btn-primary">Add Skill</a>
+                                {% empty %}
+                                    <p>No skill information added yet.</p>
+                                {% endfor %}
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'profile:add_skill' %}" class="btn btn-primary">Add Skill</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
         
-        
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Certificate</div>
                         <div class="card-body scrollable-card-body">
@@ -311,7 +435,7 @@
                                             <p><strong>Issuing Organization:</strong> {{ certificate.issuing_organization|truncatechars:30 }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>Issue Date:</strong> {{ certificate.issue_date }}</p>
+                                            <p><strong>Issue Date:</strong> {{ certificate.issue_date|date }}</p>
                                         </div>
                                         <div class="col-3">
                                             <p><strong>Expiration Date:</strong> {{ certificate.expiration_date|default:"N/A" }}</p>
@@ -344,15 +468,13 @@
                                 <p>No certificate information added yet.</p>
                             {% endfor %}
                         </div>
-                        
                         <div class="card-footer">
                             <a href="{% url 'profile:add_certificate' %}" class="btn btn-primary">Add Certificate</a>
                         </div>
                     </div>
                 </div>
         
-        
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Cover Letter</div>
                         <div class="card-body scrollable-card-body">
@@ -363,47 +485,44 @@
                                             <h5>{{ cover_letter.title }}</h5>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p><strong>Description:</strong> {{ cover_letter.content|truncatechars:30 }}</p>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3 text-center">
+                                            <p><strong>Created:</strong> {{ cover_letter.created_at|date }}</p>
                                         </div>
-                                        <div class="col-3">
-                                            <p><strong>Created:</strong> {{ cover_letter.created_at }}</p>
+                                        <div class="col-3 text-center">
+                                            <p><strong>Last Updated:</strong> {{ cover_letter.updated_at|date }}</p>
                                         </div>
-                                        <div class="col-3">
-                                            <p><strong>Last Updated:</strong> {{ cover_letter.updated_at }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <a href="{% url 'profile:edit_cover_letter' cover_letter.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
-                                                <form action="{% url 'profile:delete_cover_letter' cover_letter.id %}" method="post">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this cover letter?')">Delete</button>
-                                                </form>
-                                            </div>
+                                        <div class="col-6 text-center">
+                                            <p><strong>Description:</strong> {{ cover_letter.content }}</p>
                                         </div>
                                     </div>
+                                    
                                     {% if not forloop.last %}
                                         <hr>
                                     {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <a href="{% url 'profile:edit_cover_letter' cover_letter.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                            <form action="{% url 'profile:delete_cover_letter' cover_letter.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this cover letter?')">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             {% empty %}
                                 <p>No cover letter information added yet.</p>
                             {% endfor %}
                         </div>
-                        
-                        
                         <div class="card-footer">
                             <a href="{% url 'profile:add_cover_letter' %}" class="btn btn-primary">Add Cover Letter</a>
                         </div>
                     </div>
                 </div>
         
-        
-        
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Project</div>
                         <div class="card-body scrollable-card-body">
@@ -444,16 +563,13 @@
                                 <p>No project information added yet.</p>
                             {% endfor %}
                         </div>
-                        
-                        
-                        
                         <div class="card-footer">
                             <a href="{% url 'profile:add_project' %}" class="btn btn-primary">Add Project</a>
                         </div>
                     </div>
                 </div>
         
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">Your Self-Introduction</div>
                         <div class="card-body scrollable-card-body">
@@ -469,15 +585,15 @@
                                             <p><strong>Uploaded:</strong> {{ self_introduction.created_at }}</p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <a href="{% url 'profile:edit_self_introduction' self_introduction.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
-                                                <form action="{% url 'profile:delete_self_introduction' self_introduction.id %}" method="post">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this self-introduction?')">Delete</button>
-                                                </form>
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <a href="{% url 'profile:edit_self_introduction' self_introduction.id %}" class="btn btn-secondary btn-sm mr-2">Edit</a>
+                                            <form action="{% url 'profile:delete_self_introduction' self_introduction.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this self-introduction?')">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -490,7 +606,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
         <div id="template-tab" class="tab-pane fade">

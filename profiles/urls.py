@@ -8,6 +8,17 @@ app_name = 'profile'
 urlpatterns = [
     path('profile/', profile, name='profile'),
     path('edit-profile/', edit_profile_view, name='edit_profile'),
+
+    
+
+
+    path('generate-cv/', views.generate_cv, name='generate_user_cv'),
+
+    path('cv/<int:cv_id>/', views.view_cv, name='view_cv'),
+    path('delete-cv/<int:pk>/', views.delete_cv, name='delete_cv'),
+
+
+
     path('add_education/', views.add_education, name='add_education'),
     path('edit_education/<int:education_id>/', views.edit_education, name='edit_education'),
     path('education/<int:education_id>/delete/', views.delete_education, name='delete_education'),
@@ -42,10 +53,7 @@ urlpatterns = [
 
 
 
-    path('generate-cv/', views.generate_cv, name='generate_user_cv'),
 
-    path('cv/<int:cv_id>/', views.view_cv, name='view_cv'),
-    path('delete-cv/<int:pk>/', views.delete_cv, name='delete_cv'),
 
 ]
 

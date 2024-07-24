@@ -5,20 +5,21 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.formfields import PhoneNumberField
 from django.core.validators import URLValidator
-
+from django.forms import modelformset_factory
+from ckeditor.widgets import CKEditorWidget
 
 class ProfileForm(forms.ModelForm):
-    phone_number = PhoneNumberField()
     class Meta:
         model = Profile
         fields = ['full_name','job_title','contact_email', 'phone_number', 'address', 'profile_picture',
                   'github_link', 'facebook_link', 'linkedin_link', 'personal_website']
         widgets = {
-            'full_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'job_title': forms.TextInput(attrs={'class': 'form-control'}),
+            'full_name': forms.TextInput(attrs={'class': 'form-control','maxlength': '100'}),
+            'job_title': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '100'}),
+            'phone_number':forms.TextInput(attrs={'class': 'form-control', 'type':'tel', 'class': 'form-control'}),
             'contact_email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'maxlength': '255'}),
             'profile_picture': forms.FileInput(attrs={'class': 'form-control-file'}),
             'github_link': forms.URLInput(attrs={'class': 'form-control'}),
             'facebook_link': forms.URLInput(attrs={'class': 'form-control'}),
@@ -72,7 +73,7 @@ class EducationForm(forms.ModelForm):
         model = Education
         fields = ['institution', 'degree', 'field_of_study', 'start_date', 'end_date', 'description']
         widgets = {
-            'institution': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Institution'}),
+            'institution': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Institution','maxlength': '255'}),
             'degree': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Degree'}),
             'field_of_study': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Field of Study'}),
             'start_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Start Date', 'type': 'date'}),
@@ -114,8 +115,8 @@ class ExperienceForm(forms.ModelForm):
         model = Experience
         fields = ['company_name', 'job_title', 'start_date', 'end_date', 'description']
         widgets = {
-            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company Name'}),
-            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Job Title'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company Name','maxlength': '255'}),
+            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Job Title','maxlength': '255'}),
             'start_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Start Date', 'type': 'date'}),
             'end_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'End Date', 'type': 'date'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
@@ -161,8 +162,8 @@ class CertificateForm(forms.ModelForm):
         model = Certificate
         fields = ['name', 'issuing_organization', 'issue_date', 'expiration_date', 'description', 'image']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Certificate Name'}),
-            'issuing_organization': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Issuing Organization'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Certificate Name','maxlength': '255'}),
+            'issuing_organization': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Issuing Organization', 'maxlength': '255'}),
             'issue_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Issue Date', 'type': 'date'}),
             'expiration_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Expiration Date', 'type': 'date'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
@@ -206,7 +207,7 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ['title', 'description', 'start_date', 'end_date', 'url']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control','maxlength': '255'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
@@ -250,3 +251,6 @@ class SelfIntroductionForm(forms.ModelForm):
             if video.size > max_size:
                 raise forms.ValidationError('The file size must be under 50 MB.')
         return video
+    
+
+
