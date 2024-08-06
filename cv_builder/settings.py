@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-z=xt(k^_@f7*w1l)v99s8@^mb*aznf9o2%knnpp0%9mou=fjy@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ["*"]
+#ALLOWED_HOSTS = ["*"]
 
 
 ALLOWED_HOSTS = ["cvbuilder.tech"]
@@ -219,3 +219,10 @@ CITIES_LIGHT_INCLUDE_REGION = False
 CITIES_LIGHT_INCLUDE_CITY = True
 CITIES_LIGHT_INCLUDE_SUBREGION = False
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST_PROD')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER_PROD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD_PROD')
+EMAIL_PORT = 587
+EMAIL_USE_SSL = False
