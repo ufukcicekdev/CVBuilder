@@ -70,8 +70,13 @@
                     </div>
                     <div class="col-12 col-sm-7 text-left">
                         <p class="mb-0 mt-10">{{ do_you_have_a_account }}<a href="{% url 'accounts:signup' %}">{{ signup }}</a></p>
+                        
+                    </div>
+                    <div class="col-12 col-sm-12 text-left">
+                        <p class="mb-0 mt-10"><a href="{% url 'core:forgot_password' %}">{{ forgot }}</a></p>
                     </div>
                 </div>
+                
             </form>
         
         </div>

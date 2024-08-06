@@ -20,12 +20,16 @@ def signup_view(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            messages.success(request, 'Account created successfully!')
+            messages.success(request, mainContext.get("message_signup_successv"))
             return redirect('core:home')
         else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+            form = SignUpForm()
+            context = {
+                "form":form
+            }
+            mainContext.update(context)
+            messages.error(request, mainContext.get("message_signup_fail"))
+            return render(request, 'accounts/signup.html', mainContext)
     else:
         form = SignUpForm()
         context = {
@@ -44,14 +48,24 @@ def signin_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Logged in successfully!')
+                messages.success(request, mainContext.get("message_signin_success"))
                 return redirect('core:home')
             else:
-                messages.error(request, 'Invalid username or password.')
+                form = AuthenticationForm()
+                context = {
+                    "form":form
+                }
+                mainContext.update(context)
+                messages.error(request, mainContext.get("message_signin_fail"))
+                return render(request, 'accounts/signin.html', mainContext)
         else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+            form = AuthenticationForm()
+            context = {
+                "form":form
+            }
+            mainContext.update(context)
+            messages.error(request, mainContext.get("message_signin_fail"))
+            return render(request, 'accounts/signin.html', mainContext)
     else:
         form = AuthenticationForm()
         context = {
@@ -69,12 +83,18 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, mainContext.get("message_pass_change_success"))
             return redirect('profile:profile')
         else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field.capitalize()}: {error}")
+            form = PasswordChangeForm(request.user)
+
+            context = {
+                "form": form,
+            }
+            mainContext.update(context)
+            messages.error(request, mainContext.get("message_pass_change_fail"))
+            return render(request, 'profiles/change_password.html', mainContext)
+            
     else:
         form = PasswordChangeForm(request.user)
 

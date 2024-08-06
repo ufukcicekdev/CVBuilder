@@ -98,6 +98,9 @@
             <div class="col-12 col-sm-7 text-left">
                 <p class="mb-0 mt-10">{{ already_have_an_account }}<a href="{% url 'accounts:signin' %}">{{ login }}</a></p>
             </div>
+            <div class="col-12 col-sm-12 text-left">
+                <p class="mb-0 mt-10"><a href="{% url 'core:forgot_password' %}">{{ forgot }}</a></p>
+            </div>
         </div>
     </form>
     
