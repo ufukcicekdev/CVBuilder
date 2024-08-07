@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group, Permission
 # Create your models here.
+
+
 
 
 class Profile(models.Model):
@@ -17,6 +20,12 @@ class Profile(models.Model):
     facebook_link = models.URLField(blank=True, null=True, verbose_name='Facebook Link')
     linkedin_link = models.URLField(blank=True, null=True, verbose_name='LinkedIn Link')
     personal_website = models.URLField(blank=True, null=True, verbose_name='Personal Website')
+
+    LANGUAGE_CHOICES = [
+        ('en', 'English'),
+        ('tr', 'Türkçe'),
+    ]
+    language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES, default='en')
 
     def __str__(self):
         return self.full_name

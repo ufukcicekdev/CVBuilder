@@ -100,14 +100,13 @@ def reset_password(request):
     try:
         user = get_object_or_404(User, username=username)
         otp = random.randint(100000, 999999)
-        context = {
-            'username': user.username,
-            'otp': otp,
-        }
-        context.update(mainContext)
-        email_content = render_to_string('email_templates/reset_password_email.html', context)
+        email_temp = mainContext.get('forgot_password')
+        email_content = email_temp.format(username=user.username, otp=otp)
+        mainContext["forgot_password"] =email_content
+        email_content = render_to_string('email_templates/reset_password_email.html', mainContext)
+        email_subject= mainContext.get("forgot_mail_subject")
         try:
-            email = EmailMessage("Hesap Doğrulama", email_content, to=[user.email])
+            email = EmailMessage(email_subject, email_content, to=[user.email])
             email.content_subtype = 'html' 
             email.send()
             return JsonResponse({"status": "sent", "email": user.email, "rotp": otp})
@@ -116,5 +115,5 @@ def reset_password(request):
     except Exception as e:
         return JsonResponse({"status": "failed", "errordetail": str(e)})
     
-################### Forgot Passwords Close ################################### Forgot Passwords Open ################
+################### Forgot Passwords Close ####################
 
