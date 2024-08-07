@@ -12,7 +12,7 @@ def get_trans_lang(request):
         try:
             current_language = request.user.profile.language
         except Profile.DoesNotExist:
-            pass  
+            current_language = settings.LANGUAGE_CODE
     else:
         current_language = request.session.get(settings.LANGUAGE_COOKIE_NAME, settings.LANGUAGE_CODE)
     translation_dict1 = get_translation('header-footer', request)

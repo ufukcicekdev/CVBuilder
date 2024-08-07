@@ -11,7 +11,7 @@ def get_translation(tag_name, request):
         try:
             language_code = request.user.profile.language
         except Profile.DoesNotExist:
-            pass  
+            language_code = settings.LANGUAGE_CODE 
 
     else:
         language_code = request.session.get(settings.LANGUAGE_COOKIE_NAME, settings.LANGUAGE_CODE)
