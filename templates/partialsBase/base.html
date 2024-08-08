@@ -49,6 +49,7 @@
       gtag('config', 'G-HDJ50NB3XE');
     </script>
 
+  <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 
 </head>
 
@@ -85,6 +86,21 @@
     <!-- Popper js -->
     <script src="{% static 'js/popper.min.js' %}" ></script>
 
+
+    <script>
+      ClassicEditor
+      .create( document.querySelector('#id_content'), {
+      codeBlock: {
+      
+      },
+      toolbar: [
+            'heading', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo'
+        ],
+      } )
+      .catch( error => {
+      console.error( error );
+      } );
+      </script>
     
 
     <!-- Bootstrap js -->

@@ -83,7 +83,7 @@ class Certificate(models.Model):
 
 class CoverLetter(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

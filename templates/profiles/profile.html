@@ -493,7 +493,7 @@ hr {
                                             <p><strong>Last Updated:</strong> {{ cover_letter.updated_at|date }}</p>
                                         </div>
                                         <div class="col-6 text-center">
-                                            <p><strong>Description:</strong> {{ cover_letter.content }}</p>
+                                            <p><strong>Description:</strong> {{ cover_letter.content|safe }}</p>
                                         </div>
                                     </div>
                                     
