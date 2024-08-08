@@ -66,6 +66,22 @@
     </div>
 </div>
 
+
+<script>
+    ClassicEditor
+    .create( document.querySelector('#id_content'), {
+    codeBlock: {
+    
+    },
+    toolbar: [
+          'heading', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo'
+      ],
+    } )
+    .catch( error => {
+    console.error( error );
+    } );
+    </script>
+
 {% include 'core/footer.html' %}
 
 {% endblock %}

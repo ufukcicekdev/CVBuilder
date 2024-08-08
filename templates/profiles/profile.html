@@ -538,11 +538,14 @@ hr {
                                             <p><strong>Description:</strong> {{ project.description|safe|truncatechars:30 }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>Start Date:</strong> {{ project.start_date }}</p>
+                                            <p><strong>Start Date:</strong> {{ project.start_date|date }}</p>
                                         </div>
                                         <div class="col-3">
-                                            <p><strong>End Date:</strong> {{ project.end_date|default:"Ongoing" }}</p>
+                                            <p><strong>End Date:</strong> {{ project.end_date|date|default:"Ongoing" }}</p>
                                         </div>
+                                        {% if not forloop.last %}
+                                        <hr>
+                                        {% endif %}
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
@@ -555,9 +558,7 @@ hr {
                                             </div>
                                         </div>
                                     </div>
-                                    {% if not forloop.last %}
-                                        <hr>
-                                    {% endif %}
+                                    
                                 </div>
                             {% empty %}
                                 <p>No project information added yet.</p>

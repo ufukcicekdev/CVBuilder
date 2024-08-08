@@ -208,8 +208,8 @@ class ProjectForm(forms.ModelForm):
         fields = ['title', 'description', 'start_date', 'end_date', 'url']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control','maxlength': '255'}),
-            'description': forms.Textarea(attrs={'class': 'form-control','id':'id_content', 'rows': 3}),
-            'start_date': forms.DateInput(attrs={'class': 'form-control',  'type': 'date'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 8}),
+            'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'url': forms.URLInput(attrs={'class': 'form-control'}),
         }

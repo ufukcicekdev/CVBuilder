@@ -95,7 +95,7 @@ class CoverLetter(models.Model):
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True,null=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(null=True, blank=True)
     url = models.URLField(blank=True, null=True)
