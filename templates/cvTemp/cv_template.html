@@ -136,9 +136,9 @@
                                 <i class="fa fa-bullseye purple-color"></i>
                                 <h3>{{ project.title }}</h3>
                                 <div class="mh-eduyear">{{ project.start_date }} - {{ project.end_date|default:"Ongoing" }}</div>
-                                <p>
-                                    {{ project.description }}
-                                </p>
+                                
+                                {{ project.description|safe }}
+                                
                                 {% if project.url %}
                                 <a href="{{ project.url }}" class="btn btn-primary" target="_blank">View Detail</a>
                                 {% endif %}
@@ -168,22 +168,16 @@
                     <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <h3>Skills</h3>
                     </div>
-                    <div class="col-sm-12 col-md-12">
-                        <div class="mh-professional-skills wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
-                            {% if user_data.skills %}
-                            <ul class="mh-professional-progress" >
-                                {% for skill in user_data.skills %}
-                                <li>
-                                    <div class="mh-progress mh-progress-circle" data-progress="{{ skill.rating }}"></div>
-                                    <div class="pr-skill-name">{{ skill.name }}</div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            {% else %}
-                            <p>No skills</p>
-                            {% endif %}
+                    {% if user_data.skills %}
+                        {% for skill in user_data.skills  %}
+                        <div class="col-sm-4 text-center">
+                            <div class="mh-progress mh-progress-circle" data-progress="{{ skill.rating }}"></div>
+                            <div class="pr-skill-name">{{ skill.name }}</div>
                         </div>
-                    </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No skills</p>
+                    {% endif %}
                
                     
                 </div>

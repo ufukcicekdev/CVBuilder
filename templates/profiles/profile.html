@@ -535,7 +535,7 @@ hr {
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
-                                            <p><strong>Description:</strong> {{ project.description|truncatechars:30 }}</p>
+                                            <p><strong>Description:</strong> {{ project.description|safe|truncatechars:30 }}</p>
                                         </div>
                                         <div class="col-3">
                                             <p><strong>Start Date:</strong> {{ project.start_date }}</p>
