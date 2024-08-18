@@ -34,7 +34,6 @@ def send_generated_reminder_email(user):
     email_temp = mail_context.get('profile_update_mail_content')
     email_content = email_temp.format(username=user.username)
     mail_context["profile_update_mail_content"] = email_content
-    print(mail_context.get('profile_update_mail_content'))
     email_content = render_to_string('email_templates/profileUpdate.html', mail_context)
     email = EmailMessage(subject, email_content, EMAIL_HOST_USER, to=[user.email])
     email.content_subtype = 'html'
